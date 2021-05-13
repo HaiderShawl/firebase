@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="/css/style.css">
+
+        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        
+        <title>Check Your Schedule</title>
+	</head>
+    
+	<body>
+        <div class="container pt-5">
+			<div class="row justify-content-between">
+				<div class="col">
+					<a class="navbar-brand" href="">CheckYour<span>Schedule.</span></a>
+				</div>
+			</div>
+		</div>
+
+		<form class="container-fluid pt-2" method="POST" action="/">
+            <div class="form-group">
+                <label for="class">Class</label>
+
+                <select class="custom-select" id="class" name="class">
+                    {{#each classID}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+
+            </div>
+            <button class="btn btn-primary" type="submit">Check</button>
+        </form>
+
+        <div class="container-fluid overflow-auto">
+            <table class="table table-bordered">
+            <tr>{{{day}}}</tr>
+            <tr>{{{time}}}</tr>
+            <tr>{{{classData}}}</tr>
+        </table>
+        </div>
+
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <p class="copyright">
+                    Data from rise-institute.com | Made by hady
+                    </p>
+				</div>
+            </div>
+        </footer>
+	</body>
+</html>

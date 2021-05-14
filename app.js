@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
 const bodyParser = require('body-parser')
+const { v4 } = require('uuid')
 
 
 const getData = require('./getData')
@@ -20,6 +21,14 @@ app.set('views', viewsPath)
 app.use(express.static(publicPath))
 app.use(bodyParser.urlencoded({ extended: true }))
 
+
+
+app.get('/api', (req, res) => {
+    const path = `/api/item/${v4()}`
+    res.setHeader('Content-Type', 'text/html')
+    res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate')
+    res.end(`Hello! Go to item: <a href="${path}">${path}</a>`)
+})
 
 
 app.get('', (req, res) => {
@@ -66,7 +75,13 @@ app.get('/:className', async (req, res) => {
 
 
 
+app.get('/api/item/:slug', (req, res) => {
+    const { slug } = req.params
+    res.end(`Item: ${slug}`)
+  })
+  
+module.exports = app
 
-app.listen(port, () => {
-    console.log('The server is running on port ' + port)
-})
+// app.listen(port, () => {
+//     console.log('The server is running on port ' + port)
+// })
